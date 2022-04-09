@@ -4,7 +4,10 @@ import { DataChart } from './Data/Data'
 function App() {
   return (
     <div className="App">
-      <DataChart />
+      <div className='row'>
+        <div className='col-md-3'>Nav</div>
+        <div className='col-md-9'>Main</div>
+      </div>
     </div>
   );
 }
