@@ -89,7 +89,10 @@ export const BasketChart = ({ id, name, chart, country }) => {
         <div className='pet-card' ref={dragRef}>
             {name}
             {isDragging && '😱'}
-            <DataChart country={country} />
+            {/* <DataChart country={country} /> */}
+            {name}
+            {id}
+            {chart}
         </div>
     )
 }

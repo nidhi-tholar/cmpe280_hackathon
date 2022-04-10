@@ -58,15 +58,6 @@ export function CountryData(country = 'INDIA') {
 
 }
 
-// export function IndiaGDP() {
-//     var IndiaGDPData = [['year', 'India']]
-
-//     for (let i = 1; i < data.length; i++) {
-//         IndiaGDPData.push(data[i].slice(0, 2))
-//     }
-//     console.log(IndiaGDPData);
-// }
-
 
 export const options = {
     chart: {
