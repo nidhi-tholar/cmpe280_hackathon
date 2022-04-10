@@ -8,7 +8,7 @@ import { DataChart } from '../Data/Data';
 const NavBar = () => {
 
     const macroeconomic = [
-        { id: 1, name: 'GDP Growth Rate', chart: DataChart },
+        { id: 1, name: 'GDP Growth Rate', chart: <DataChart /> },
         { id: 2, name: 'GDP Current USD' },
         { id: 3, name: 'Current Account Balance' },
         { id: 4, name: 'FDI net' },

@@ -8,7 +8,12 @@ import { useDrop } from 'react-dnd';
 import { useState } from "react";
 import { DataChart } from "../Data/Data";
 
+
+
 export default function Home() {
+
+    const selectedCountry = 'India';
+
     return (
         <div>
             <div className="row">
@@ -34,8 +39,8 @@ export default function Home() {
                     </div>
 
                     <div className=" row drag-drop-area">
-                        <DragDropArea />
-                        <DataChart />
+                        <DragDropArea country={selectedCountry} />
+
                     </div>
                 </div>
             </div>
@@ -45,11 +50,12 @@ export default function Home() {
 }
 
 
-export function DragDropArea({ isDragging, text }) {
+export function DragDropArea({ isDragging, text, country },) {
+    console.log('DnD country:', country);
     return (
         <DndProvider backend={HTML5Backend}>
             {/* Here, render a component that uses DND inside it */}
-            <Basket />
+            <Basket country={country} />
         </DndProvider>
     )
 }
@@ -71,7 +77,7 @@ export const MenuCard = ({ id, name, chart }) => {
     )
 }
 
-export const BasketChart = ({ id, name, chart }) => {
+export const BasketChart = ({ id, name, chart, country }) => {
     const [{ isDragging }, dragRef] = useDrag({
         type: 'menuItem',
         item: { id, name, chart },
@@ -83,12 +89,13 @@ export const BasketChart = ({ id, name, chart }) => {
         <div className='pet-card' ref={dragRef}>
             {name}
             {isDragging && '😱'}
-            <DataChart />
+            <DataChart country={country} />
         </div>
     )
 }
 
-export const Basket = () => {
+export const Basket = (props) => {
+    console.log('Basket props: ', props);
     const [basket, setBasket] = useState([])
     const [{ isOver }, dropRef] = useDrop({
         accept: 'menuItem',
@@ -102,7 +109,7 @@ export const Basket = () => {
     return (
         <div>
             <div style={{ backgroundColor: "rgb(143, 179, 209)", width: "800px", height: "600px" }} className='basket' ref={dropRef}>
-                {basket.map(menuItem => <BasketChart id={menuItem.id} name={menuItem.name} chart={menuItem.chart} />)}
+                {basket.map(menuItem => <BasketChart id={menuItem.id} name={menuItem.name} chart={menuItem.chart} country={props.country} />)}
                 {isOver && <div>Drop Here!</div>}
 
             </div>
