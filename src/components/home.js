@@ -17,6 +17,11 @@ export default function Home() {
         setBasket([]);
     }
 
+    const years = [];
+    for (let i = 1990; i < 2021; i++) {
+        years.push(i)
+    }
+
     return (
         <div>
             <div className="row">
@@ -27,7 +32,29 @@ export default function Home() {
                 <div className="col-md-1 vl"></div>
                 <div className='col-md-8 main-container'>
                     <div className="row">
-                        <div className="col-md-9">Year Filter</div>
+                        <div className="col-md-9">
+
+                            <div className="row">
+                                <div className="col-md-3">
+                                <span>From year</span>
+                            <select value="value-2">
+                            {years.map(item => {
+                                return (<option key={item} value={item}>{item}</option>);
+                            })}
+                            </select>
+                                </div>
+                                <div className="col-md-3">
+                                <span>To Year</span>
+                            <select value="value-2">
+                            {years.reverse().map(item => {
+                                return (<option key={item} value={item}>{item}</option>);
+                            })}
+                            </select>
+                            
+                                </div>
+                            </div>
+
+                        </div>
                         <div className="col-md-3">
                             <select onChange={(e)=>{handleCountryChange(e.target.value)}}>
                                 <option>USA</option>
@@ -37,9 +64,11 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className=" row annotation">
-                        annotation
-                    </div>
+
+                        <div className="annotation">
+                            <button>Annotations</button>
+                        </div>
+
 
                     <div className=" row drag-drop-area">
                         <DragDropArea basket={basket} setBasket={setBasket} />

@@ -85,3 +85,25 @@
   .im-elements{
       margin-top: 50px;
   }
+
+  .annotation{
+      margin-top: 40px;
+  }
+
+  .login{
+    background-color: #e0edb5;
+    width: 400px;
+    min-height: 300px;
+    border-radius: 10px;
+  
+    position: fixed;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+
+  .form-elements{
+      margin-top: 40px;
+  }
