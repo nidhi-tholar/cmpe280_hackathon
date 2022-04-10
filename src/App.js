@@ -1,13 +1,23 @@
 import './App.css';
-import { DataChart } from './Data/Data'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import NavBar from './components/nav';
+import Login from './components/login';
+import Home from './components/home';
+import Imports from './components/imports';
+import Predict from './components/predict';
 
 function App() {
   return (
     <div className="App">
-      <div className='row'>
-        <div className='col-md-3'>Nav</div>
-        <div className='col-md-9'>Main</div>
-      </div>
+      <BrowserRouter>
+        <Routes>
+              <Route path="/" element={<Login/>}></Route>
+              <Route path="/home" element={<Home/>}></Route>
+              <Route path="/imports" element={<Imports/>}></Route>
+              <Route path="/predict" element={<Predict/>}></Route>
+          </Routes>
+      </BrowserRouter>
+      
     </div>
   );
 }
