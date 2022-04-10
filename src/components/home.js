@@ -6,13 +6,16 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useDrag } from 'react-dnd';
 import { useDrop } from 'react-dnd';
 import { useState } from "react";
-import { DataChart } from "../Data/Data";
-
-
 
 export default function Home() {
 
-    const selectedCountry = 'India';
+    const [selectedCountry, setSelectedCountry] = useState("USA");
+    const [basket, setBasket] = useState([])
+
+    const handleCountryChange = (country) => {
+        setSelectedCountry(country);
+        setBasket([]);
+    }
 
     return (
         <div>
@@ -20,13 +23,13 @@ export default function Home() {
                 <Header />
             </div>
             <div className='row'>
-                <div className='col-md-3'><NavBar /></div>
+                <div className='col-md-3'><NavBar country={selectedCountry} /></div>
                 <div className="col-md-1 vl"></div>
                 <div className='col-md-8 main-container'>
                     <div className="row">
                         <div className="col-md-9">Year Filter</div>
                         <div className="col-md-3">
-                            <select>
+                            <select onChange={(e)=>{handleCountryChange(e.target.value)}}>
                                 <option>USA</option>
                                 <option>CHINA</option>
                                 <option>INDIA</option>
@@ -39,7 +42,7 @@ export default function Home() {
                     </div>
 
                     <div className=" row drag-drop-area">
-                        <DragDropArea country={selectedCountry} />
+                        <DragDropArea basket={basket} setBasket={setBasket} />
 
                     </div>
                 </div>
@@ -50,12 +53,11 @@ export default function Home() {
 }
 
 
-export function DragDropArea({ isDragging, text, country },) {
-    console.log('DnD country:', country);
+export function DragDropArea({ isDragging, text, basket, setBasket },) {
     return (
         <DndProvider backend={HTML5Backend}>
             {/* Here, render a component that uses DND inside it */}
-            <Basket country={country} />
+            <Basket basket={basket} setBasket={setBasket}/>
         </DndProvider>
     )
 }
@@ -71,13 +73,13 @@ export const MenuCard = ({ id, name, chart }) => {
     return (
         <div className='pet-card' ref={dragRef}>
             {name}
-            {isDragging && '😱'}
+            {isDragging}
 
         </div>
     )
 }
 
-export const BasketChart = ({ id, name, chart, country }) => {
+export const BasketChart = ({ id, name, chart }) => {
     const [{ isDragging }, dragRef] = useDrag({
         type: 'menuItem',
         item: { id, name, chart },
@@ -88,19 +90,16 @@ export const BasketChart = ({ id, name, chart, country }) => {
     return (
         <div className='pet-card' ref={dragRef}>
             {name}
-            {isDragging && '😱'}
-            {/* <DataChart country={country} /> */}
-            {name}
-            {id}
+            {isDragging}
             {chart}
         </div>
     )
 }
 
-export const Basket = (props) => {
-    console.log('Basket props: ', props);
-    const [basket, setBasket] = useState([])
+export const Basket = ({basket, setBasket}) => {
+    
     const [{ isOver }, dropRef] = useDrop({
+        
         accept: 'menuItem',
         drop: (item) => setBasket((basket) =>
             !basket.includes(item) ? [...basket, item] : basket),
@@ -111,8 +110,8 @@ export const Basket = (props) => {
 
     return (
         <div>
-            <div style={{ backgroundColor: "rgb(143, 179, 209)", width: "800px", height: "600px" }} className='basket' ref={dropRef}>
-                {basket.map(menuItem => <BasketChart id={menuItem.id} name={menuItem.name} chart={menuItem.chart} country={props.country} />)}
+            <div style={{ width: "800px", height: "600px", marginTop:"20px" }} className='basket' ref={dropRef}>
+                {basket.map(menuItem => <BasketChart id={menuItem.id} name={menuItem.name} chart={menuItem.chart} />)}
                 {isOver && <div>Drop Here!</div>}
 
             </div>

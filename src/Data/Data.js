@@ -54,15 +54,13 @@ export function CountryData(country = 'INDIA') {
             chartData.push(interval)
         }
     }
-
-
 }
 
 
 export const options = {
     chart: {
-        title: "GDP data for 3 Countries",
-        subtitle: "Denoted in USD",
+        // title: "GDP data for 3 Countries",
+        // subtitle: "Denoted in USD",
     },
 };
 
