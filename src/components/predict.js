@@ -1,6 +1,7 @@
 import Header from "./header";
 import NavBar from "./nav";
 import '../App.css';
+import {useState} from 'react';
 
 let value1=50;
 let value2=50;
@@ -13,10 +14,12 @@ let value8=50;
 let value9=50;
 let value10=50;
 
-let show=false;
+
 
 
 const Predict = () => {
+
+    const [showPopUp, setShow] = useState(false);
     
     const updateValue1 = (val) => {
         value1 = val;
@@ -59,13 +62,6 @@ const Predict = () => {
         document.getElementById('sliderValue10').innerHTML=val; 
     }
 
-    const openPopUp = () => {
-        show=true;
-    }
-
-    function closeForm() {
-        show=false;
-    }
 
     return (
         <div>
@@ -166,10 +162,14 @@ const Predict = () => {
                         </div>
 
                         <div className="btn-container">
-                            <button className="ml-btn" onClick={openPopUp()}>Call Machine Learning Model</button>
+                            <button className="ml-btn" onClick={() => setShow((s) => !s)}>Call Machine Learning Model</button>
                         </div>
+                        {/* <div style={{ display: show ? "block" : "none" }}><PopUpContainer/></div> */}
+                        {/* <div>{show && <PopUpContainer close={closeForm}/>}</div> */}
+                        <div>
+                        { showPopUp ? <PopUpContainer close={setShow}/> : null }
 
-                        <div>{show && <PopUpContainer/>}</div>
+                        </div>
 
                     </div>
                 </div>
@@ -178,11 +178,27 @@ const Predict = () => {
     )
 }
 
-export const PopUpContainer = () => {
+export const PopUpContainer = (props) => {
     return (
         <div className="formPopup">
             <h5>Seleted Values</h5>
-            <span>Projected GDP: {value1}</span>
+            <div className="pop-up-contents">
+            <span>Projected GDP: {value1}</span> <br/>
+            <span>Current Account Balance (% of GDP): {value2}</span> <br/>
+            <span> Foreign direct investment, net inflows(% of GDP): {value3}</span> <br/>
+            <span>Fertilizer consumption (% of fertilizer production): {value4}</span> <br/>
+            <span>Total reserves (% of total external debt): {value5}</span> <br/>
+            <span>FDI- NetOutflows(%ofG DP): {value6}</span> <br/>
+            <span>Agricultural Contribution (% GDP): {value7}</span> <br/>
+            <span>PManufacturing(%GDP): {value8}</span> <br/>
+            <span>Agriculture, forestry, and fishing, value added (annual % growth): {value9}</span> <br/>
+            <span>Total debt service (% of GNI): {value10}</span>
+
+            <div className="close-btn-container">
+                <button onClick={() => props.close((s) => !s)}>Close</button>
+            </div>
+            </div>
+            
         </div> 
     )
 }

@@ -62,8 +62,22 @@
     top: 40%;
     transform: translate(-50%, -50%);
     z-index: 9;
+    border: 2px black solid;
 
-    width: 500px;
-    height: 500px;
+    width: 550px;
+    height: 350px;
     background-color: rgb(143, 179, 209);
+
+    margin: 20px;
+  }
+
+
+  .close-btn-container{
+    text-align: center;
+    margin-top: 20px;
+  }
+
+
+  .pop-up-contents{
+      margin: 20px;
   }
