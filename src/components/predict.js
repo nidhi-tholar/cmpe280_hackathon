@@ -194,6 +194,8 @@ export const PopUpContainer = (props) => {
             <span>Agriculture, forestry, and fishing, value added (annual % growth): {value9}</span> <br/>
             <span>Total debt service (% of GNI): {value10}</span>
 
+            <div style={{marginTop:"20px"}}>Calling Machine Learning Model............</div>
+
             <div className="close-btn-container">
                 <button onClick={() => props.close((s) => !s)}>Close</button>
             </div>
