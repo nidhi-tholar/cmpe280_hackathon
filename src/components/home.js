@@ -23,7 +23,6 @@ export default function Home() {
     }
 
     const [annotations, setAnnotations] = useState([]);
-    const [showNotes, setShowNotes] = useState(false);
 
     return (
         <div>
@@ -79,7 +78,7 @@ export default function Home() {
 
                         <div className="col-md-2">
                             <div className="annotation">
-                                <button onClick={() => setShowNotes((s) => !s)}>Annotations</button>
+                                <h4>Annotations</h4>
                                 <div> 
                                     {annotations}
                                 </div>
