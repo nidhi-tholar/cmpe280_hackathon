@@ -22,13 +22,16 @@ export default function Home() {
         years.push(i)
     }
 
+    const [annotations, setAnnotations] = useState([]);
+    const [showNotes, setShowNotes] = useState(false);
+
     return (
         <div>
             <div className="row">
                 <Header />
             </div>
             <div className='row'>
-                <div className='col-md-3'><NavBar country={selectedCountry} /></div>
+                <div className='col-md-2'><NavBar country={selectedCountry} /></div>
                 <div className="col-md-1 vl"></div>
                 <div className='col-md-8 main-container'>
                     <div className="row">
@@ -67,16 +70,22 @@ export default function Home() {
                         </div>
                     </div>
 
+                    <div className="row">
+                        <div className="col-md-10">
+                            <div className=" row drag-drop-area">
+                                <DragDropArea basket={basket} setBasket={setBasket} notes={setAnnotations}/>
+                            </div>
+                        </div>
 
-                    <div className="annotation">
-                        <button>Annotations</button>
-                    </div>
-
-
-                    <div className=" row drag-drop-area">
-                        <DragDropArea basket={basket} setBasket={setBasket} />
-
-                    </div>
+                        <div className="col-md-2">
+                            <div className="annotation">
+                                <button onClick={() => setShowNotes((s) => !s)}>Annotations</button>
+                                <div> 
+                                    {annotations}
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -85,11 +94,11 @@ export default function Home() {
 }
 
 
-export function DragDropArea({ isDragging, text, basket, setBasket },) {
+export function DragDropArea({ isDragging, text, basket, setBasket, notes },) {
     return (
         <DndProvider backend={HTML5Backend}>
             {/* Here, render a component that uses DND inside it */}
-            <Basket basket={basket} setBasket={setBasket} />
+            <Basket basket={basket} setBasket={setBasket} notes={notes}/>
         </DndProvider>
     )
 }
@@ -111,7 +120,24 @@ export const MenuCard = ({ id, name, chart }) => {
     )
 }
 
-export const BasketChart = ({ id, name, chart }) => {
+export const Notes = (props) => {
+
+    const [notes, setNotes] = useState("");
+
+    const closeNote = () => {
+        props.closeNote(notes)
+    }
+    return (
+        <div>
+            <div style={{backgroundColor:"rgba(90, 142, 184, 0.5", width:"200px"}}>
+                <textarea onChange = {(e)=>setNotes(e.target.value)} type="text" placeholder="Add Notes.."></textarea> <br/>
+                <button onClick={closeNote}>Add note</button>
+            </div>
+        </div>
+    )
+}
+
+export const BasketChart = ({ id, name, chart, anNotes }) => {
     const [{ isDragging }, dragRef] = useDrag({
         type: 'menuItem',
         item: { id, name, chart },
@@ -119,16 +145,33 @@ export const BasketChart = ({ id, name, chart }) => {
             isDragging: monitor.isDragging()
         })
     })
+
+    const [showNotes, setShowNotes] = useState(false);
+
+    const addNotes = () => {
+        setShowNotes(true);
+    }
+
+    const submitNotes = (notes) =>{
+
+        anNotes(notes);
+        setShowNotes(false);
+    }
+
     return (
-        <div className='pet-card' ref={dragRef}>
-            {name}
-            {isDragging}
-            {chart}
+        <div>
+            <div onClick={addNotes} className='pet-card' ref={dragRef}>
+                {name}
+                {isDragging}
+                {chart}
+            </div>
+            {showNotes ? <Notes closeNote={submitNotes}/> : null }
         </div>
+        
     )
 }
 
-export const Basket = ({ basket, setBasket }) => {
+export const Basket = ({ basket, setBasket, notes }) => {
 
     const [{ isOver }, dropRef] = useDrop({
 
@@ -143,7 +186,7 @@ export const Basket = ({ basket, setBasket }) => {
     return (
         <div>
             <div style={{ width: "800px", height: "600px", marginTop: "20px" }} className='basket' ref={dropRef}>
-                {basket.map(menuItem => <BasketChart id={menuItem.id} name={menuItem.name} chart={menuItem.chart} />)}
+                {basket.map(menuItem => <BasketChart id={menuItem.id} name={menuItem.name} chart={menuItem.chart} anNotes={notes} />)}
                 {isOver && <div>Drop Here!</div>}
 
             </div>
