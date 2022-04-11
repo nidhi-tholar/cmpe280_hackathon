@@ -5,6 +5,7 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DataChart } from "../Data/Data";
 import { AgriculturalDataChart } from '../Data/AgriculturalDataChart';
+import { ManufactoringDataChart } from '../Data/ManufactoringDataChart';
 
 const NavBar = (props) => {
 
@@ -20,7 +21,7 @@ const NavBar = (props) => {
 
     const agricultural = [
         { id: 1, name: 'Contribution', chart: <AgriculturalDataChart country={props.country} /> },
-        { id: 2, name: 'Manufactoring', chart: ': No data present' },
+        { id: 2, name: 'Manufactoring', chart: <ManufactoringDataChart country={props.country} /> },
         { id: 3, name: 'Fertilizers', chart: ': No data present' },
         { id: 4, name: 'Fertilizer Production', chart: ': No data present' },
         { id: 5, name: 'Forestery and Fishin', chart: ': No data present' },

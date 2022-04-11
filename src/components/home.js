@@ -60,9 +60,9 @@ export default function Home() {
                                 <option>USA</option>
                                 <option>CHINA</option>
                                 <option>INDIA</option>
-                                <option>Egypt, Arab Rep.</option>
+                                <option>Egypt, Arab Rep</option>
                                 <option>SAUDI ARABIA</option>
-                                <option>INDIA</option>
+                                <option>Global View</option>
                             </select>
                         </div>
                     </div>

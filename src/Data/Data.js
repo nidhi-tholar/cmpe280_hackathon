@@ -46,13 +46,16 @@ export function CountryData(country = 'INDIA') {
             interval.push(data[i][2])
             chartData.push(interval)
         }
-    } else {
+    } else if (country === 'USA') {
         for (let i = 1; i < data.length; i++) {
             let interval = []
             interval.push(data[i][0])
-            interval.push(data[i][3])
+            interval.push(data[i][2])
             chartData.push(interval)
         }
+    }
+    else {
+        chartData = data;
     }
 }
 
