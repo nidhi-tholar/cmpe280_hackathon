@@ -4,34 +4,35 @@ import { MenuCard } from './home';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DataChart } from "../Data/Data";
+import { AgriculturalDataChart } from '../Data/AgriculturalDataChart';
 
 const NavBar = (props) => {
 
     const macroeconomic = [
         { id: 1, name: 'GDP Growth Rate', chart: <DataChart country={props.country} /> },
-        { id: 2, name: 'GDP Current USD' ,chart: 'ABCD'},
-        { id: 3, name: 'Current Account Balance',chart: 'ABCD' },
-        { id: 4, name: 'FDI net' ,chart: 'ABCD'},
-        { id: 5, name: 'FDI net outflows - BoP' ,chart: 'ABCD'},
-        { id: 6, name: 'FDI inflows',chart: 'ABCD' },
-        { id: 7, name: 'FDI net outflows % GDP',chart: 'ABCD' },
+        { id: 2, name: 'GDP Current USD', chart: ': Chart data loading' },
+        { id: 3, name: 'Current Account Balance', chart: '' },
+        { id: 4, name: 'FDI net', chart: ': No data present' },
+        { id: 5, name: 'FDI net outflows - BoP', chart: ': No data present' },
+        { id: 6, name: 'FDI inflows', chart: ': No data present' },
+        { id: 7, name: 'FDI net outflows % GDP', chart: ': No data present' },
     ]
 
     const agricultural = [
-        { id: 1, name: 'Contribution',chart: 'ABCD' },
-        { id: 2, name: 'Manufactoring',chart: 'ABCD' },
-        { id: 3, name: 'Fertilizers' ,chart: 'ABCD'},
-        { id: 4, name: 'Fertilizer Production',chart: 'ABCD' },
-        { id: 5, name: 'Forestery and Fishin',chart: 'ABCD' },
+        { id: 1, name: 'Contribution', chart: <AgriculturalDataChart country={props.country} /> },
+        { id: 2, name: 'Manufactoring', chart: ': No data present' },
+        { id: 3, name: 'Fertilizers', chart: ': No data present' },
+        { id: 4, name: 'Fertilizer Production', chart: ': No data present' },
+        { id: 5, name: 'Forestery and Fishin', chart: ': No data present' },
     ]
 
     const debt = [
-        { id: 1, name: 'Reservers - imports',chart: 'ABCD' },
-        { id: 2, name: 'Reservers - gold',chart: 'ABCD' },
-        { id: 3, name: '% GNI',chart: 'ABCD' },
-        { id: 4, name: 'Total Debt',chart: 'ABCD' },
-        { id: 5, name: 'Debt service',chart: 'ABCD' },
-        { id: 6, name: 'GNI current',chart: 'ABCD' },
+        { id: 1, name: 'Reservers - imports', chart: ': No data present' },
+        { id: 2, name: 'Reservers - gold', chart: ': No data present' },
+        { id: 3, name: '% GNI', chart: ': No data present' },
+        { id: 4, name: 'Total Debt', chart: ': No data present' },
+        { id: 5, name: 'Debt service', chart: ': No data present' },
+        { id: 6, name: 'GNI current', chart: ': No data present' },
     ]
 
     return (

@@ -36,38 +36,41 @@ export default function Home() {
 
                             <div className="row">
                                 <div className="col-md-3">
-                                <span>From year</span>
-                            <select value="value-2">
-                            {years.map(item => {
-                                return (<option key={item} value={item}>{item}</option>);
-                            })}
-                            </select>
+                                    <span>From year</span>
+                                    <select value="value-2">
+                                        {years.map(item => {
+                                            return (<option key={item} value={item}>{item}</option>);
+                                        })}
+                                    </select>
                                 </div>
                                 <div className="col-md-3">
-                                <span>To Year</span>
-                            <select value="value-2">
-                            {years.reverse().map(item => {
-                                return (<option key={item} value={item}>{item}</option>);
-                            })}
-                            </select>
-                            
+                                    <span>To Year</span>
+                                    <select value="value-2">
+                                        {years.reverse().map(item => {
+                                            return (<option key={item} value={item}>{item}</option>);
+                                        })}
+                                    </select>
+
                                 </div>
                             </div>
 
                         </div>
                         <div className="col-md-3">
-                            <select onChange={(e)=>{handleCountryChange(e.target.value)}}>
+                            <select onChange={(e) => { handleCountryChange(e.target.value) }}>
                                 <option>USA</option>
                                 <option>CHINA</option>
+                                <option>INDIA</option>
+                                <option>Egypt, Arab Rep.</option>
+                                <option>SAUDI ARABIA</option>
                                 <option>INDIA</option>
                             </select>
                         </div>
                     </div>
 
 
-                        <div className="annotation">
-                            <button>Annotations</button>
-                        </div>
+                    <div className="annotation">
+                        <button>Annotations</button>
+                    </div>
 
 
                     <div className=" row drag-drop-area">
@@ -86,7 +89,7 @@ export function DragDropArea({ isDragging, text, basket, setBasket },) {
     return (
         <DndProvider backend={HTML5Backend}>
             {/* Here, render a component that uses DND inside it */}
-            <Basket basket={basket} setBasket={setBasket}/>
+            <Basket basket={basket} setBasket={setBasket} />
         </DndProvider>
     )
 }
@@ -125,10 +128,10 @@ export const BasketChart = ({ id, name, chart }) => {
     )
 }
 
-export const Basket = ({basket, setBasket}) => {
-    
+export const Basket = ({ basket, setBasket }) => {
+
     const [{ isOver }, dropRef] = useDrop({
-        
+
         accept: 'menuItem',
         drop: (item) => setBasket((basket) =>
             !basket.includes(item) ? [...basket, item] : basket),
@@ -139,7 +142,7 @@ export const Basket = ({basket, setBasket}) => {
 
     return (
         <div>
-            <div style={{ width: "800px", height: "600px", marginTop:"20px" }} className='basket' ref={dropRef}>
+            <div style={{ width: "800px", height: "600px", marginTop: "20px" }} className='basket' ref={dropRef}>
                 {basket.map(menuItem => <BasketChart id={menuItem.id} name={menuItem.name} chart={menuItem.chart} />)}
                 {isOver && <div>Drop Here!</div>}
 

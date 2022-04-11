@@ -71,15 +71,15 @@ export function DataChart(props) {
     console.log('Data Chart country: ', props.country);
     CountryData(props.country);
     return (
-        <div style={{marginBottom:"20px"}}>
-            <Chart 
-            chartType="Line"
-            width="100%"
-            height="250px"
-            data={chartData}
-            options={options}
-        />
+        <div style={{ marginBottom: "20px" }}>
+            <Chart
+                chartType="Line"
+                width="100%"
+                height="250px"
+                data={chartData}
+                options={options}
+            />
         </div>
-        
+
     );
 }
