@@ -6,24 +6,31 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DataChart } from "../Data/Data";
 import { AgriculturalDataChart } from '../Data/AgriculturalDataChart';
 import { ManufactoringDataChart } from '../Data/ManufactoringDataChart';
+import { FertilizersDataChart } from '../Data/FertilizersDataChart';
+import { FertilizersProductionChart } from '../Data/FertilizersProductionChart';
+import { GDPCurrentUSD } from '../Data/GDPCurrentUSD';
+import { FDINetPercGDP } from '../Data/FDINetPercGDP';
+import { FDIBoP } from '../Data/FDIBoP';
+import { CurrentACBal } from '../Data/CurrentACBal';
+import { NetInflowChart } from '../Data/NetInflow';
 
 const NavBar = (props) => {
 
     const macroeconomic = [
         { id: 1, name: 'GDP Growth Rate', chart: <DataChart country={props.country} /> },
-        { id: 2, name: 'GDP Current USD', chart: ': Chart data loading' },
-        { id: 3, name: 'Current Account Balance', chart: '' },
-        { id: 4, name: 'FDI net', chart: ': No data present' },
-        { id: 5, name: 'FDI net outflows - BoP', chart: ': No data present' },
+        { id: 2, name: 'GDP Current USD', chart: <GDPCurrentUSD country={props.country} /> },
+        { id: 3, name: 'Current Account Balance', chart: <CurrentACBal country={props.country} /> },
+        { id: 4, name: 'FDI net', chart: <NetInflowChart country={props.country} /> },
+        { id: 5, name: 'FDI net outflows - BoP', chart: <FDIBoP country={props.country} /> },
         { id: 6, name: 'FDI inflows', chart: ': No data present' },
-        { id: 7, name: 'FDI net outflows % GDP', chart: ': No data present' },
+        { id: 7, name: 'FDI net outflows % GDP', chart: <FDINetPercGDP country={props.country} /> },
     ]
 
     const agricultural = [
         { id: 1, name: 'Contribution', chart: <AgriculturalDataChart country={props.country} /> },
         { id: 2, name: 'Manufactoring', chart: <ManufactoringDataChart country={props.country} /> },
-        { id: 3, name: 'Fertilizers', chart: ': No data present' },
-        { id: 4, name: 'Fertilizer Production', chart: ': No data present' },
+        { id: 3, name: 'Fertilizers', chart: <FertilizersDataChart country={props.country} /> },
+        { id: 4, name: 'Fertilizer Production', chart: <FertilizersProductionChart country={props.country} /> },
         { id: 5, name: 'Forestery and Fishin', chart: ': No data present' },
     ]
 
